@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture 5G native IA — Med Yassine Britel</title>
+<meta name="description" content="Une architecture réseau 5G où les fonctions réseau elles-mêmes prennent en charge l'IA générative et sécurisent la donnée — pitch pour événement startup Google.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-row">
+    <a href="index.html#top" class="nav-mark"><span class="dot"></span> M. Y. Britel</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">Profil</a></li>
+      <li><a href="index.html#experience">Expérience</a></li>
+      <li><a href="index.html#projects">Projets</a></li>
+      <li><a href="index.html#skills">Compétences</a></li>
+      <li><a href="index.html#education">Formation</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Contact</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html#projects">← Retour aux projets</a></div>
+      <span class="eyebrow-line"><span class="seg"></span> PITCH — GOOGLE STARTUP EVENT · AI-NATIVE NETWORK ARCHITECTURE</span>
+      <h1>Une architecture 5G où les fonctions réseau elles-mêmes pilotent et sécurisent l'IA</h1>
+      <p class="hero-lead">Aujourd'hui, l'IA générative est branchée <em>sur</em> le réseau, en périphérie, comme une application parmi d'autres. Cette architecture propose l'inverse&nbsp;: faire des fonctions réseau du Cœur 5G (AMF, SMF, UPF, NEF, PCF) les briques natives qui exposent, orchestrent et sécurisent un agent IA générative local — pour qu'il tourne à l'intérieur du réseau de l'entreprise, jamais en dehors.</p>
+
+      <div class="spec-strip">
+        <div class="spec-cell">
+          <span class="label mono">RÔLE</span>
+          <span class="value">Conception architecture &amp; développement</span>
+        </div>
+        <div class="spec-cell">
+          <span class="label mono">CONTEXTE</span>
+          <span class="value">ATL Communications · Future Networx</span>
+        </div>
+        <div class="spec-cell">
+          <span class="label mono">STACK PRINCIPALE</span>
+          <span class="value">Open5GS, srsRAN, Angular, Node.js, Groq / Llama 4</span>
+        </div>
+        <div class="spec-cell">
+          <span class="label mono">DÉPÔT</span>
+          <span class="value"><a href="https://github.com/britek2001/5GOSS" target="_blank" rel="noopener" style="border-bottom:1px solid var(--ink);">5GOSS (privé) ↗</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <div class="pb-block">
+      <h2>Le problème à résoudre</h2>
+      <p>Brancher un agent IA générative sur un réseau d'entreprise pose trois problèmes qu'on résout aujourd'hui séparément — latence via un cache, sécurité via un VPN, gouvernance via une charte d'usage — sans jamais les traiter comme un seul problème réseau&nbsp;:</p>
+      <ul>
+        <li><strong style="color:var(--ink)">Latence</strong> — un agent qui interroge un cloud IA externe hérite de la latence du trajet, incompatible avec des cas d'usage temps réel (contrôle industriel, diagnostic réseau, véhicules).</li>
+        <li><strong style="color:var(--ink)">Souveraineté de la donnée</strong> — les données envoyées à un modèle externe quittent le périmètre de confiance de l'entreprise, avec un risque de fuite, de ré-entraînement non consenti, ou de non-conformité réglementaire.</li>
+        <li><strong style="color:var(--ink)">Gouvernance des actions IA</strong> — un agent qui peut à la fois lire des données sensibles et déclencher des actions a besoin d'un contrôle d'accès aussi strict que celui d'un opérateur humain, pas d'une simple clé API.</li>
+      </ul>
+    </div>
+
+    <div class="pb-block">
+      <h2>L'architecture — l'IA comme fonction réseau à part entière</h2>
+      <p>Plutôt que de traiter l'agent IA comme une application connectée au réseau, cette architecture l'intègre au même niveau que les fonctions réseau du Cœur 5G, chacune héritant d'un rôle précis dans le cycle de vie de l'IA&nbsp;:</p>
+      <div class="two-col">
+        <div>
+          <p><strong style="color:var(--ink)">NEF — la porte d'entrée contrôlée.</strong> Le Network Exposure Function expose au modèle IA uniquement les métriques et événements réseau autorisés (latence, charge, anomalies), sans jamais donner un accès direct et non filtré au Cœur 5G.</p>
+          <p><strong style="color:var(--ink)">PCF — les règles avant l'inférence.</strong> Le Policy Control Function applique, avant chaque appel au modèle, les règles de ce que l'agent a le droit de lire et de proposer, selon la slice et le rôle de l'opérateur qui l'a déclenché.</p>
+          <p><strong style="color:var(--ink)">SMF / UPF — la donnée reste locale.</strong> Le plan utilisateur (UPF) et la gestion de session (SMF) garantissent que les flux de données alimentant l'inférence restent confinés à la slice dédiée à l'IA — aucune donnée d'inférence ne transite par une passerelle Internet publique.</p>
+        </div>
+        <div>
+          <p><strong style="color:var(--ink)">AMF — l'identité avant tout.</strong> Toute requête vers l'agent IA, humaine ou automatisée, est d'abord authentifiée et enregistrée comme le serait un équipement (UE) qui rejoint le réseau.</p>
+          <p><strong style="color:var(--ink)">RBAC — l'agent propose, l'humain dispose.</strong> Les recommandations de l'agent IA (diagnostic, score de santé réseau, correctifs) passent par le même filtre de rôle que les actions humaines&nbsp;: aucune action réseau n'est exécutée automatiquement sans autorisation explicite.</p>
+          <p><strong style="color:var(--ink)">Chiffrement de bout en bout.</strong> TLS / AES-256 protège les échanges entre chaque fonction réseau et le runtime d'inférence local, du capteur jusqu'à la réponse de l'agent.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-block">
+      <h2>Démonstration — la plateforme qui porte cette architecture</h2>
+      <p>Capture de l'interface connectée à un cœur 5G réel (srsRAN + Open5GS), qui sert aujourd'hui de socle à cette approche.</p>
+
+      <figure style="margin:32px 0 0 0;">
+        <img src="images/topologie-reseau.png" alt="Topologie réseau 5G en temps réel : deux gNodeB (GNB-PARIS-001, GNB-PARIS-002) connectés à un Cœur 5G central, chacun relié à cinq objets réseau (OsoRed)." style="width:100%; height:auto; border:1px solid var(--rule, #B9B2A0); display:block;">
+        <figcaption class="mono" style="font-size:12px; color:var(--muted,#5B6472); margin-top:10px;">Vue topologique en direct — chaque gNodeB et ses objets réseau (OsoRed) sont la source de vérité que consulte l'agent IA avant toute recommandation.</figcaption>
+      </figure>
+
+      <figure style="margin:40px 0 0 0;">
+        <img src="images/antennes-oss.png" alt="Fiches techniques des antennes actives Nokia, ZTE et Ericsson : type, bande de fréquence et gain en dBi." style="width:100%; height:auto; border:1px solid var(--rule, #B9B2A0); display:block;">
+        <figcaption class="mono" style="font-size:12px; color:var(--muted,#5B6472); margin-top:10px;">Catalogue des antennes actives (Nokia, ZTE, Ericsson) exposé via NEF — ce sont ces mêmes fiches, normalisées, que l'agent IA reçoit pour raisonner sur l'état matériel du réseau.</figcaption>
+      </figure>
+    </div>
+
+    <div class="pb-block">
+      <h2>Schéma — l'IA intégrée aux fonctions du Cœur 5G</h2>
+      <div class="arch-diagram">
+        <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; font-family:'IBM Plex Mono', monospace;">
+          <!-- top row: RAN + core functions -->
+          <line x1="120" y1="60" x2="220" y2="60" stroke="#B9B2A0" stroke-width="1"/>
+          <line x1="320" y1="60" x2="220" y2="60" stroke="#B9B2A0" stroke-width="1"/>
+          <line x1="220" y1="60" x2="220" y2="140" stroke="#B9B2A0" stroke-width="1"/>
+
+          <rect x="10" y="40" width="110" height="40" fill="none" stroke="#10192B"/>
+          <text x="65" y="64" text-anchor="middle" font-size="10" fill="#10192B">gNodeB / RAN</text>
+
+          <rect x="220" y="40" width="100" height="40" fill="none" stroke="#10192B"/>
+          <text x="270" y="64" text-anchor="middle" font-size="10" fill="#10192B">AMF</text>
+
+          <rect x="360" y="40" width="100" height="40" fill="none" stroke="#10192B"/>
+          <text x="410" y="64" text-anchor="middle" font-size="10" fill="#10192B">SMF / UPF</text>
+
+          <line x1="320" y1="60" x2="360" y2="60" stroke="#B9B2A0" stroke-width="1"/>
+          <line x1="460" y1="60" x2="560" y2="60" stroke="#0E7C86" stroke-width="1.4"/>
+
+          <!-- NEF gate -->
+          <rect x="560" y="40" width="100" height="40" fill="none" stroke="#D8952E" stroke-width="1.4"/>
+          <text x="610" y="64" text-anchor="middle" font-size="10" fill="#8a5c14">NEF</text>
+
+          <line x1="610" y1="80" x2="610" y2="150" stroke="#0E7C86" stroke-width="1.4"/>
+
+          <!-- PCF -->
+          <rect x="420" y="150" width="100" height="40" fill="none" stroke="#D8952E" stroke-width="1.4"/>
+          <text x="470" y="174" text-anchor="middle" font-size="10" fill="#8a5c14">PCF</text>
+          <line x1="520" y1="170" x2="560" y2="170" stroke="#0E7C86" stroke-width="1.4"/>
+
+          <!-- AI agent -->
+          <rect x="560" y="150" width="110" height="40" fill="none" stroke="#0E7C86" stroke-width="1.4"/>
+          <text x="615" y="174" text-anchor="middle" font-size="10" fill="#063A40">Agent IA local</text>
+
+          <line x1="670" y1="170" x2="730" y2="170" stroke="#0E7C86" stroke-width="1.4"/>
+
+          <!-- RBAC -->
+          <rect x="730" y="150" width="90" height="40" fill="none" stroke="#D8952E" stroke-width="1.4"/>
+          <text x="775" y="174" text-anchor="middle" font-size="10" fill="#8a5c14">RBAC</text>
+
+          <line x1="775" y1="190" x2="775" y2="250" stroke="#B9B2A0" stroke-width="1"/>
+          <text x="775" y="270" text-anchor="middle" font-size="10" fill="#10192B">Action réseau</text>
+          <text x="775" y="285" text-anchor="middle" font-size="9" fill="#5B6472">(supervisée)</text>
+
+          <text x="270" y="300" text-anchor="middle" font-size="9" fill="#5B6472">plan de contrôle réseau</text>
+          <text x="615" y="300" text-anchor="middle" font-size="9" fill="#0E7C86">données exposées, filtrées, chiffrées</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="pb-block">
+      <h2>Sécurité &amp; gouvernance de la donnée</h2>
+      <div class="two-col">
+        <div>
+          <p><strong style="color:var(--ink)">Confinement par slice.</strong> Le Network Slicing (eMBB, URLLC, mMTC) isole le trafic d'inférence IA dans une tranche dédiée, avec bande passante et latence réservées, séparée du trafic utilisateur classique.</p>
+          <p><strong style="color:var(--ink)">Traçabilité complète.</strong> Chaque lecture de donnée par l'agent et chaque action proposée sont journalisées, avec le rôle de l'opérateur ayant validé — ou refusé — la recommandation.</p>
+        </div>
+        <div>
+          <p><strong style="color:var(--ink)">Chiffrement bout en bout.</strong> TLS / AES-256 sur l'ensemble des échanges entre fonctions réseau, moteur d'inférence et interface de supervision.</p>
+          <p><strong style="color:var(--ink)">Aucune donnée ne sort.</strong> Le modèle raisonne sur les métriques exposées par NEF, hébergées et traitées sur l'infrastructure de l'entreprise — pas de dépendance à un cloud IA tiers pour l'inférence critique.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-block">
+      <h2>Où en est le projet</h2>
+      <ul>
+        <li>Interface de supervision 5G (Angular / Node.js) validée sur un testbed réel srsRAN + Open5GS.</li>
+        <li>Agent IA (Groq / Llama 4) déjà connecté à Grafana / Prometheus, calculant un score de santé réseau (0–100) — cas validé&nbsp;: 55&nbsp;% → 60&nbsp;% après correction d'un déséquilibre de bande passante entre slices eMBB et URLLC.</li>
+        <li>RBAC opérationnel sur l'ensemble des actions réseau, humaines comme IA.</li>
+        <li>Prochaine étape&nbsp;: exposer le modèle via NEF comme fonction réseau native, avec filtrage PCF en amont de chaque appel — objet de ce pitch.</li>
+      </ul>
+      <div class="stack-pills">
+        <span class="tag">Open5GS</span>
+        <span class="tag">srsRAN</span>
+        <span class="tag">AMF · SMF · UPF · NEF · PCF</span>
+        <span class="tag">Angular · Node.js</span>
+        <span class="tag">Groq · Llama 4</span>
+        <span class="tag">RBAC / IAM</span>
+        <span class="tag">Network Slicing</span>
+        <span class="tag">TLS / AES-256</span>
+      </div>
+    </div>
+
+  </div>
+
+  <section id="contact" class="contact-section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-index">→</span>
+        <h2>Envie d'en discuter ?</h2>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-lead">Je peux détailler comment chaque fonction réseau du Cœur 5G s'articule avec l'agent IA, les choix de sécurité, ou la feuille de route vers une exposition native via NEF.</p>
+          <a href="mailto:britelyassine47@gmail.com" class="btn btn-primary">Envoyer un email</a>
+        </div>
+        <ul class="contact-list">
+          <li><span>Email</span><a href="mailto:britelyassine47@gmail.com">britelyassine47@gmail.com</a></li>
+          <li><span>GitHub</span><a href="https://github.com/britek2001" target="_blank" rel="noopener">britek2001</a></li>
+          <li><span>Dépôt du projet</span><a href="https://github.com/britek2001/5GOSS" target="_blank" rel="noopener">5GOSS (privé) ↗</a></li>
+          <li><span>Portfolio complet</span><a href="index.html#top">britek2001.github.io/Med-Britel.github.io ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Med Yassine Britel</span>
+        <span><a href="index.html#top" style="color:inherit;">← Retour au portfolio</a></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
